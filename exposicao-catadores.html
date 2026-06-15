@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformando Realidades · Extensão com Catadores</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #2D4A3E;
+    --verde-claro: #3D6B5A;
+    --laranja: #C8622A;
+    --laranja-suave: #E07840;
+    --creme: #F5EFE4;
+    --creme-escuro: #EDE4D3;
+    --grafite: #1E1E1E;
+    --texto: #3A3A3A;
+    --branco: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100svh;
+    background: var(--verde);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(200,98,42,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(200,98,42,0.10) 0%, transparent 50%);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(200,98,42,0.2);
+    border: 1px solid rgba(200,98,42,0.4);
+    color: #F0A070;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .hero-icon-recycle {
+    font-size: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    font-weight: 900;
+    color: var(--creme);
+    line-height: 1.15;
+    max-width: 700px;
+    position: relative;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #F0A070;
+  }
+
+  .hero-sub {
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+    color: rgba(245,239,228,0.65);
+    max-width: 480px;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(245,239,228,0.4);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(245,239,228,0.4), transparent);
+    animation: scrollDown 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scrollDown {
+    0%, 100% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* ─── INTRO QUOTE ─── */
+  .intro-quote {
+    background: var(--creme-escuro);
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .intro-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    color: var(--verde);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .intro-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    font-weight: 600;
+  }
+
+  /* ─── SEÇÃO TÍTULO ─── */
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--verde);
+    line-height: 1.2;
+  }
+
+  /* ─── LINHA DO TEMPO ─── */
+  .timeline-section {
+    padding: 4rem 1.5rem;
+    background: var(--creme);
+  }
+
+  .timeline-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .timeline {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--laranja), var(--verde));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-node {
+    flex-shrink: 0;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  .node-1 { background: linear-gradient(135deg, #C8622A, #E07840); }
+  .node-2 { background: linear-gradient(135deg, #2D4A3E, #3D6B5A); }
+  .node-3 { background: linear-gradient(135deg, #5B8A6E, #2D4A3E); }
+
+  .timeline-content {
+    flex: 1;
+    background: var(--branco);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-left: 3px solid transparent;
+  }
+
+  .item-1 .timeline-content { border-color: var(--laranja); }
+  .item-2 .timeline-content { border-color: var(--verde); }
+  .item-3 .timeline-content { border-color: #5B8A6E; }
+
+  .timeline-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    margin-bottom: 0.3rem;
+  }
+
+  .item-2 .timeline-label { color: var(--verde); }
+  .item-3 .timeline-label { color: #5B8A6E; }
+
+  .timeline-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--grafite);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: #555;
+  }
+
+  /* ─── GALERIA ─── */
+  .gallery-section {
+    padding: 4rem 1.5rem;
+    background: var(--verde);
+  }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-header .section-eyebrow { color: #F0A070; }
+  .gallery-header .section-title { color: var(--creme); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .gallery-item:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16/9;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+
+  .gallery-item:hover img { transform: scale(1.04); }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(30,30,30,0.85), transparent);
+    padding: 1rem 0.75rem 0.75rem;
+    color: var(--creme);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── APRENDIZADOS ─── */
+  .learnings-section {
+    padding: 4rem 1.5rem;
+    background: var(--creme-escuro);
+  }
+
+  .learnings-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .learnings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 480px) {
+    .learnings-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .learning-card {
+    background: var(--branco);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.45s ease;
+  }
+
+  .learning-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .learning-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--verde);
+    margin-bottom: 0.4rem;
+  }
+
+  .learning-card p {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .card-accent {
+    width: 32px;
+    height: 3px;
+    background: var(--laranja);
+    border-radius: 2px;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ─── FRASES ─── */
+  .quotes-section {
+    padding: 4rem 1.5rem;
+    background: var(--creme);
+  }
+
+  .quotes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .quote-card {
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: rgba(255,255,255,0.12);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .qc-green { background: var(--verde); }
+  .qc-orange { background: var(--laranja); }
+  .qc-dark { background: var(--grafite); }
+
+  .quote-card p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    color: var(--creme);
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .quote-card cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,239,228,0.55);
+    position: relative;
+  }
+
+  /* ─── IMPACTO NÚMEROS ─── */
+  .impact-section {
+    padding: 4rem 1.5rem;
+    background: var(--laranja);
+    text-align: center;
+  }
+
+  .impact-header .section-eyebrow { color: rgba(255,255,255,0.7); }
+  .impact-header .section-title { color: var(--branco); margin-bottom: 2.5rem; }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .impact-stat {
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 1.25rem 0.75rem;
+  }
+
+  .impact-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--branco);
+    display: block;
+    line-height: 1;
+  }
+
+  .impact-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.4rem;
+    display: block;
+  }
+
+  /* ─── ENCERRAMENTO ─── */
+  .closing-section {
+    padding: 5rem 1.5rem 4rem;
+    background: var(--verde);
+    text-align: center;
+  }
+
+  .closing-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .closing-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: var(--creme);
+    margin-bottom: 1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .closing-section p {
+    font-size: 0.9rem;
+    color: rgba(245,239,228,0.65);
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .closing-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .tag {
+    background: rgba(200,98,42,0.25);
+    border: 1px solid rgba(200,98,42,0.4);
+    color: #F0A070;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--grafite);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  footer strong { color: rgba(255,255,255,0.55); }
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20,20,20,0.95);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 90svh;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--creme-escuro); }
+  .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--laranja); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="hero-icon-recycle">♻️</span>
+    Projeto de Extensão · Cáritas de Tianguá
+  </div>
+  <h1>Transformando<br><em>Realidades</em></h1>
+  <p class="hero-sub">Uma experiência de extensão com catadores de materiais recicláveis — três encontros, uma história de escuta, aprendizado e vínculos.</p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    explorar
+  </div>
+</section>
+
+<!-- INTRO QUOTE -->
+<div class="intro-quote">
+  <blockquote>
+    "A extensão universitária não é um serviço prestado à comunidade — é um encontro que nos transforma."
+    <cite>· Reflexão do projeto</cite>
+  </blockquote>
+</div>
+
+<!-- LINHA DO TEMPO -->
+<section class="timeline-section">
+  <div class="timeline-header">
+    <span class="section-eyebrow">A jornada</span>
+    <h2 class="section-title">Três encontros,<br>uma trajetória</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item item-1">
+      <div class="timeline-node node-1">🏛️</div>
+      <div class="timeline-content">
+        <div class="timeline-label">1º Encontro</div>
+        <h3>Conhecendo a Cáritas de Tianguá</h3>
+        <p>O projeto começou com escuta. Visitamos a Cáritas de Tianguá para conhecer a instituição, suas ações sociais e, principalmente, a realidade dos catadores de materiais recicláveis. Cada história ouvida naquele espaço plantou uma semente de responsabilidade e pertencimento.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item item-2">
+      <div class="timeline-node node-2">📋</div>
+      <div class="timeline-content">
+        <div class="timeline-label">2º Encontro</div>
+        <h3>Planejando a intervenção</h3>
+        <p>Com a realidade compreendida, chegou o momento de construir junto. Apresentamos nossa proposta aos coordenadores da Cáritas e aos representantes dos próprios catadores, discutimos necessidades e desenhamos coletivamente a ação que iria acontecer. Planejar com a comunidade, não para ela.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item item-3">
+      <div class="timeline-node node-3">🤝</div>
+      <div class="timeline-content">
+        <div class="timeline-label">3º Encontro</div>
+        <h3>A ação no galpão</h3>
+        <p>O encontro definitivo aconteceu no próprio galpão dos catadores. Realizamos a atividade em um ambiente de troca genuína — levamos conhecimento, mas trouxemos muito mais do que deixamos. Conscientização sobre EPIs, diálogo sobre direitos, fortalecimento de vínculos. A extensão se cumpriu.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="gallery-section">
+  <div class="gallery-header">
+    <span class="section-eyebrow">Galeria de memórias</span>
+    <h2 class="section-title">Imagens que contam</h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="1000204305.jpg" alt="Encontro no galpão — estudantes e catadores reunidos" loading="lazy">
+      <div class="gallery-caption">3º Encontro · Galpão da Cáritas de Tianguá</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="1000204306.jpg" alt="Estudante entregando kit a catador" loading="lazy">
+      <div class="gallery-caption">Entrega de materiais · Conexão e cuidado</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="1000204304.jpg" alt="Estudante entregando EPI a catador com camisa do Palmeiras" loading="lazy">
+      <div class="gallery-caption">Conscientização sobre EPIs · Proteção é direito</div>
+    </div>
+  </div>
+</section>
+
+<!-- APRENDIZADOS -->
+<section class="learnings-section">
+  <div class="learnings-header">
+    <span class="section-eyebrow">O que levamos</span>
+    <h2 class="section-title">Aprendizados do projeto</h2>
+  </div>
+
+  <div class="learnings-grid">
+    <div class="learning-card">
+      <span class="card-icon">👂</span>
+      <div class="card-accent"></div>
+      <h4>A escuta como ponto de partida</h4>
+      <p>Antes de qualquer ação, aprendemos que ouvir ativamente a comunidade é o primeiro — e mais importante — passo de qualquer intervenção.</p>
+    </div>
+
+    <div class="learning-card">
+      <span class="card-icon">🔄</span>
+      <div class="card-accent"></div>
+      <h4>Extensão é troca, não doação</h4>
+      <p>Chegamos para ensinar e saímos transformados. Os catadores nos ensinaram sobre resiliência, dignidade do trabalho e força coletiva.</p>
+    </div>
+
+    <div class="learning-card">
+      <span class="card-icon">🦺</span>
+      <div class="card-accent"></div>
+      <h4>Proteção é um direito, não um luxo</h4>
+      <p>Conscientizar sobre EPIs foi também um ato político: reconhecer que trabalhadores informais merecem segurança e dignidade.</p>
+    </div>
+
+    <div class="learning-card">
+      <span class="card-icon">🌱</span>
+      <div class="card-accent"></div>
+      <h4>Medicina que olha para o todo</h4>
+      <p>A saúde dos catadores passa pelo contexto social, ambiental e trabalhista. A clínica começa muito antes do consultório.</p>
+    </div>
+
+    <div class="learning-card">
+      <span class="card-icon">🤲</span>
+      <div class="card-accent"></div>
+      <h4>Vínculos como ferramenta terapêutica</h4>
+      <p>O cuidado genuíno cria laços que vão além do encontro. Presença e empatia são, em si, formas de intervenção em saúde.</p>
+    </div>
+
+    <div class="learning-card">
+      <span class="card-icon">🏙️</span>
+      <div class="card-accent"></div>
+      <h4>Invisibilidade social como problema de saúde</h4>
+      <p>Catadores sustentam o sistema de reciclagem urbana, mas vivem à margem. Tornar esse trabalho visível é um ato de saúde pública.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FRASES INSPIRADORAS -->
+<section class="quotes-section">
+  <div style="text-align:center; margin-bottom:2rem;">
+    <span class="section-eyebrow">Palavras que ficaram</span>
+    <h2 class="section-title">Frases que nos moveram</h2>
+  </div>
+
+  <div class="quotes-grid">
+    <div class="quote-card qc-green">
+      <p>Não é lixo. É matéria-prima. E quem a coleta é trabalhador, não invisível.</p>
+      <cite>· Reflexão da equipe</cite>
+    </div>
+    <div class="quote-card qc-orange">
+      <p>A universidade existe para servir à sociedade — e servi-la começa por ouvi-la.</p>
+      <cite>· Princípio da extensão</cite>
+    </div>
+    <div class="quote-card qc-dark">
+      <p>Cada EPI entregue é um gesto que diz: a sua vida importa, o seu trabalho importa, você importa.</p>
+      <cite>· Momento da ação</cite>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACTO -->
+<section class="impact-section">
+  <div class="impact-header">
+    <span class="section-eyebrow">Em números</span>
+    <h2 class="section-title">O alcance do projeto</h2>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-stat">
+      <span class="impact-number">3</span>
+      <span class="impact-label">encontros</span>
+    </div>
+    <div class="impact-stat">
+      <span class="impact-number">1</span>
+      <span class="impact-label">comunidade</span>
+    </div>
+    <div class="impact-stat">
+      <span class="impact-number">∞</span>
+      <span class="impact-label">aprendizados</span>
+    </div>
+  </div>
+</section>
+
+<!-- ENCERRAMENTO -->
+<section class="closing-section">
+  <span class="closing-icon">🌿</span>
+  <h2>Uma extensão que nos estendeu</h2>
+  <p>Este projeto ficará na memória não como uma atividade cumprida, mas como um encontro que redefiniu o que significa estar na medicina — e no mundo.</p>
+  <div class="closing-tags">
+    <span class="tag">♻️ Sustentabilidade</span>
+    <span class="tag">🤝 Comunidade</span>
+    <span class="tag">🏥 Medicina Social</span>
+    <span class="tag">🌱 Extensão</span>
+    <span class="tag">💛 Cáritas</span>
+  </div>
+</section>
+
+<footer>
+  <strong>Faculdade ViaSapiens · Projeto de Extensão</strong><br>
+  Cáritas de Tianguá · Catadores de Materiais Recicláveis
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item, .learning-card').forEach(el => observer.observe(el));
+
+  // Lightbox
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
